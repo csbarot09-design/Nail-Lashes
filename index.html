@@ -118,7 +118,7 @@
 <a class="uppercase text-xs tracking-widest font-label text-on-surface opacity-70 hover:opacity-100 transition-opacity" href="#faq">FAQ</a>
 </div>
 <div class="flex items-center gap-4">
-<a href="#booking" class="hidden md:block bg-primary text-on-primary px-8 py-3 rounded-full uppercase text-xs tracking-widest font-label transition-transform duration-200 scale-100 active:scale-90 hover:opacity-90">
+<a href="#booking" class="open-booking hidden md:block bg-primary text-on-primary px-8 py-3 rounded-full uppercase text-xs tracking-widest font-label transition-transform duration-200 scale-100 active:scale-90 hover:opacity-90">
                 Book Now
             </a>
 <button class="md:hidden flex items-center p-2 text-primary" id="menu-toggle">
@@ -133,7 +133,7 @@
 <a class="uppercase text-lg tracking-widest font-label text-on-surface opacity-70" href="#services" onclick="toggleMenu()">Services</a>
 <a class="uppercase text-lg tracking-widest font-label text-on-surface opacity-70" href="#faq" onclick="toggleMenu()">FAQ</a>
 <div class="pt-8">
-<a href="#booking" onclick="toggleMenu()" class="block w-full bg-primary text-on-primary px-8 py-5 rounded-full uppercase text-sm tracking-widest font-label text-center">
+<a href="#booking" onclick="toggleMenu()" class="open-booking block w-full bg-primary text-on-primary px-8 py-5 rounded-full uppercase text-sm tracking-widest font-label text-center">
             Book Appointment
         </a>
 </div>
@@ -173,7 +173,7 @@
 <span class="hidden md:inline opacity-30">•</span>
 <a href="tel:+18158934112" class="hover:opacity-100 transition-opacity">(815) 893-4112</a>
 <span class="hidden md:inline opacity-30">•</span>
-<span class="w-full md:w-auto">1520 Carlemont Dr, Crystal Lake IL</span>
+<span class="w-full md:w-auto">1520 Carlemont Dr, Unit J, Crystal Lake IL</span>
 <span class="hidden md:inline opacity-30">•</span>
 <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">star</span> 4.9 Stars on Google</span>
 </p>
@@ -193,7 +193,7 @@
                     </p>
 </div>
 <div class="pt-2">
-<a href="#booking" class="inline-block bg-primary text-on-primary px-8 py-3 rounded-full uppercase text-xs tracking-widest font-label hover:opacity-90 transition-all">Book with Vy</a>
+<a href="#booking" class="open-booking inline-block bg-primary text-on-primary px-8 py-3 rounded-full uppercase text-xs tracking-widest font-label hover:opacity-90 transition-all">Book with Vy</a>
 </div>
 </div>
 <div class="md:col-span-2 order-1 md:order-2">
@@ -345,7 +345,7 @@
                     Choose your service, pick your time, and let Vy take care of the rest. Your sanctuary awaits.
                 </p>
 <div class="pt-6">
-<a href="tel:+18158934112" class="inline-block w-full md:w-auto bg-surface text-primary px-12 py-5 rounded-full text-sm font-label uppercase tracking-widest font-bold hover:bg-surface-container-low transition-colors editorial-shadow text-center">
+<a href="#booking" class="open-booking inline-block w-full md:w-auto bg-surface text-primary px-12 py-5 rounded-full text-sm font-label uppercase tracking-widest font-bold hover:bg-surface-container-low transition-colors editorial-shadow text-center">
                         Book Appointment
                     </a>
 </div>
@@ -403,9 +403,10 @@
 <div class="space-y-6">
 <h5 class="text-xs font-label uppercase tracking-widest font-bold opacity-60">Visit Us</h5>
 <address class="not-italic text-surface space-y-2 text-sm md:text-base">
-<p>1520 Carlemont Dr</p>
+<p>1520 Carlemont Dr, Unit J</p>
 <p>Crystal Lake, IL 60014</p>
 <p class="pt-2"><a href="tel:+18158934112" class="hover:text-white transition-colors">(815) 893-4112</a></p>
+<p><a href="sms:+16304003480" class="hover:text-white transition-colors">Text: (630) 400-3480</a></p>
 </address>
 </div>
 <div class="space-y-6">
@@ -414,7 +415,7 @@
 <p>Mon–Fri: 10AM – 7PM</p>
 <p>Sat: 10AM – 5PM</p>
 <p class="pt-4">
-<a class="inline-flex items-center gap-2 hover:text-white transition-colors" href="#">
+<a class="inline-flex items-center gap-2 hover:text-white transition-colors" href="https://www.instagram.com/nailsandlash1520" target="_blank" rel="noopener">
 <span class="material-symbols-outlined text-xl">camera</span>
                             @nailsandlash1520
                         </a>
@@ -432,16 +433,438 @@
 </div>
 </div>
 </footer>
-<!-- Chatbot Placeholder UI -->
-<div class="fixed bottom-6 right-6 z-[60] flex flex-col items-end">
-<button class="w-[60px] h-[60px] rounded-full bg-[#7B2D5E] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 group">
-<span class="material-symbols-outlined text-3xl">chat</span>
-<div class="absolute bottom-full right-0 mb-4 bg-white text-[#7B2D5E] px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg border border-[#7B2D5E]/10">
+<!-- AI Chat Widget -->
+<div id="chat-widget" class="fixed bottom-6 right-6 z-[60] flex flex-col items-end gap-3">
+
+    <!-- Chat Window -->
+    <div id="chat-pane" style="display:none;flex-direction:column;width:min(340px,calc(100vw - 48px));height:520px" class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <!-- Header -->
+        <div class="bg-[#7B2D5E] text-white px-5 py-4 flex items-center justify-between flex-shrink-0">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-base">spa</span>
+                </div>
+                <div>
+                    <p class="font-semibold text-sm leading-tight">Nails &amp; Lashes</p>
+                    <p class="text-xs leading-tight" style="color:rgba(255,255,255,0.65)">Virtual Assistant</p>
+                </div>
+            </div>
+            <button id="chat-close" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.7)">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+
+        <!-- Messages -->
+        <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3" style="background:#f8f6f4"></div>
+
+        <!-- Quick reply chips -->
+        <div id="quick-replies" class="px-4 pb-3 flex flex-wrap gap-2 flex-shrink-0" style="background:#f8f6f4"></div>
+
+        <!-- Input bar -->
+        <div class="p-3 bg-white border-t border-gray-100 flex gap-2 flex-shrink-0">
+            <input id="chat-input" type="text" placeholder="Ask me anything…" autocomplete="off"
+                class="flex-1 border border-gray-200 rounded-full px-4 py-2 text-sm outline-none transition-colors"
+                style="focus:border-color:#7B2D5E">
+            <button id="chat-send" class="w-9 h-9 rounded-full text-white flex items-center justify-center hover:opacity-90 transition-opacity flex-shrink-0" style="background:#7B2D5E">
+                <span class="material-symbols-outlined text-sm">send</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Toggle button -->
+    <button id="chat-toggle" class="w-[60px] h-[60px] rounded-full text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 relative group" style="background:#7B2D5E">
+        <span class="material-symbols-outlined text-3xl" id="chat-icon">chat</span>
+        <div class="absolute bottom-full right-0 mb-3 bg-white px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg" style="color:#7B2D5E">
             Chat with us
         </div>
-</button>
+    </button>
 </div>
-<!-- TIDIO CHATBOT SCRIPT GOES HERE -->
+<!-- BOOKING MODAL -->
+<div id="booking-modal" class="fixed inset-0 z-[100] bg-black/50 hidden items-center justify-center p-4">
+    <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90vh]">
+        <!-- Left Side: Selection -->
+        <div class="flex-1 p-6 md:p-8 overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-headline italic text-[#7B2D5E]">Book Your Appointment</h2>
+                <button id="close-booking" class="text-gray-400 hover:text-gray-600">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <!-- Step 1: Select Service -->
+            <div id="step-1">
+                <p class="text-sm font-medium text-gray-500 uppercase tracking-widest mb-4">Step 1: Select Service</p>
+                <div class="grid grid-cols-1 gap-3">
+                    <button class="service-btn text-left p-4 border rounded-xl hover:border-[#7B2D5E] hover:bg-[#7B2D5E]/5 transition-all group" data-service="Classic Manicure" data-price="$45">
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium group-hover:text-[#7B2D5E]">Classic Manicure</span>
+                            <span class="text-[#7B2D5E]">$45</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Luxury nail care and polish (45 mins)</p>
+                    </button>
+                    <button class="service-btn text-left p-4 border rounded-xl hover:border-[#7B2D5E] hover:bg-[#7B2D5E]/5 transition-all group" data-service="Signature Pedicure" data-price="$60">
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium group-hover:text-[#7B2D5E]">Signature Pedicure</span>
+                            <span class="text-[#7B2D5E]">$60</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Rejuvenating foot care and massage (60 mins)</p>
+                    </button>
+                    <button class="service-btn text-left p-4 border rounded-xl hover:border-[#7B2D5E] hover:bg-[#7B2D5E]/5 transition-all group" data-service="Classic Lash Full Set" data-price="$120">
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium group-hover:text-[#7B2D5E]">Classic Lash Full Set</span>
+                            <span class="text-[#7B2D5E]">$120</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Natural looking eyelash extensions (2 hours)</p>
+                    </button>
+                    <button class="service-btn text-left p-4 border rounded-xl hover:border-[#7B2D5E] hover:bg-[#7B2D5E]/5 transition-all group" data-service="Brow Shaping & Wax" data-price="$35">
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium group-hover:text-[#7B2D5E]">Brow Shaping &amp; Wax</span>
+                            <span class="text-[#7B2D5E]">$35</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Precision brow design (30 mins)</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Select Date & Time -->
+            <div id="step-2" class="hidden">
+                <div class="flex items-center gap-2 mb-4">
+                    <button id="back-to-step-1" type="button" class="text-[#7B2D5E] flex items-center">
+                        <span class="material-symbols-outlined text-sm">arrow_back_ios</span>
+                    </button>
+                    <p class="text-sm font-medium text-gray-500 uppercase tracking-widest">Step 2: Select Date &amp; Time</p>
+                </div>
+
+                <div class="flex justify-between items-center mb-4">
+                    <button id="prev-month" type="button" class="text-[#7B2D5E] hover:bg-[#7B2D5E]/10 p-1 rounded-lg transition-colors">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <h3 id="current-month" class="font-bold text-gray-800"></h3>
+                    <button id="next-month" type="button" class="text-[#7B2D5E] hover:bg-[#7B2D5E]/10 p-1 rounded-lg transition-colors">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                </div>
+
+                <div id="calendar-grid" class="grid grid-cols-7 gap-1 text-center text-xs mb-4"></div>
+
+                <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Available Times</p>
+                <div id="time-grid" class="grid grid-cols-3 gap-2"></div>
+            </div>
+
+            <!-- Step 3: Contact Info -->
+            <div id="step-3" class="hidden">
+                <div class="flex items-center gap-2 mb-4">
+                    <button id="back-to-step-2" type="button" class="text-[#7B2D5E] flex items-center">
+                        <span class="material-symbols-outlined text-sm">arrow_back_ios</span>
+                    </button>
+                    <p class="text-sm font-medium text-gray-500 uppercase tracking-widest">Step 3: Contact Details</p>
+                </div>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Full Name</label>
+                        <input id="booking-name" type="text" class="w-full border rounded-xl p-3 focus:ring-2 focus:ring-[#7B2D5E] focus:border-[#7B2D5E] outline-none transition-all" placeholder="Jane Doe">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Email Address</label>
+                        <input id="booking-email" type="email" class="w-full border rounded-xl p-3 focus:ring-2 focus:ring-[#7B2D5E] focus:border-[#7B2D5E] outline-none transition-all" placeholder="jane@example.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Phone Number</label>
+                        <input id="booking-phone" type="tel" class="w-full border rounded-xl p-3 focus:ring-2 focus:ring-[#7B2D5E] focus:border-[#7B2D5E] outline-none transition-all" placeholder="(815) 000-0000">
+                    </div>
+                    <button type="button" id="confirm-booking" class="w-full bg-[#7B2D5E] text-white py-4 rounded-xl font-bold uppercase tracking-widest hover:shadow-lg transition-all mt-4">
+                        Confirm Appointment
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right Side: Summary -->
+        <div class="hidden md:block w-80 bg-[#7B2D5E]/5 p-8 border-l">
+            <h3 class="font-headline italic text-xl text-[#7B2D5E] mb-6">Summary</h3>
+            <div class="space-y-6">
+                <div class="flex gap-4">
+                    <span class="material-symbols-outlined text-[#7B2D5E]">content_cut</span>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase font-bold tracking-tighter">Service</p>
+                        <p id="summary-service" class="font-medium">Not selected</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <span class="material-symbols-outlined text-[#7B2D5E]">calendar_today</span>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase font-bold tracking-tighter">Date</p>
+                        <p id="summary-date" class="font-medium">Not selected</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <span class="material-symbols-outlined text-[#7B2D5E]">schedule</span>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase font-bold tracking-tighter">Time</p>
+                        <p id="summary-time" class="font-medium">Not selected</p>
+                    </div>
+                </div>
+                <div class="pt-6 border-t border-[#7B2D5E]/10">
+                    <div class="flex justify-between items-center text-[#7B2D5E] font-bold">
+                        <span>Total</span>
+                        <span id="summary-price">$0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- TIDIO CHATBOT SCRIPT GOES HERE (optional — remove chat widget above if using Tidio) -->
+<!-- AI Chat Script -->
+<script>
+(function () {
+    var KB = [
+        {
+            k: ['hello','hi','hey','howdy','good morning','good afternoon','good evening','yo','hiya','sup'],
+            a: "Hi there! 👋 Welcome to Nails & Lashes! I'm Vy's virtual assistant. I can help with services, hours, pricing, booking, and more. What can I help you with?",
+            c: ['Hours & Schedule','Services & Pricing','How to Book','Our Location']
+        },
+        {
+            k: ['hour','open','close','schedule','time','when','today','sunday','saturday','monday','tuesday','wednesday','thursday','friday','weekend','weekday'],
+            a: "We're open 7 days a week! ✨\n\n📅 Mon – Fri: 10 AM – 7 PM\n📅 Saturday: 10 AM – 6 PM\n📅 Sunday: 10 AM – 4 PM\n\nTo book, call or text 📞 (815) 893-4112",
+            c: ['How to Book','Services & Pricing','Our Location']
+        },
+        {
+            k: ['service','offer','do you','menu','what do','nail','lash','extension','brow','pedicure','manicure','wax','eyebrow','eyelash','microblade','microblading','facial','facials'],
+            a: "Here's what we offer:\n\n💅 Manicures\n🦶 Pedicures\n👁 Lash Extensions\n✨ Eyebrow Waxing\n🖊 Microblading\n🌿 Facials\n\nFor pricing details, call or text us at (815) 893-4112!",
+            c: ['How to Book','Hours & Schedule','Our Location']
+        },
+        {
+            k: ['microblade','microblading','brow tattoo','semi permanent','semi-permanent'],
+            a: "Yes, we offer Microblading! 🖊 It's a semi-permanent eyebrow treatment that gives you perfectly shaped, natural-looking brows.\n\nFor pricing and availability, call or text Vy at 📞 (815) 893-4112.",
+            c: ['How to Book','📞 Call or Text Us','Services & Pricing']
+        },
+        {
+            k: ['facial','facials','skin','skincare','face treatment'],
+            a: "We offer Facials! 🌿 A relaxing, skin-refreshing treatment tailored to your skin's needs.\n\nFor pricing and availability, call or text us at 📞 (815) 893-4112.",
+            c: ['How to Book','📞 Call or Text Us','Services & Pricing']
+        },
+        {
+            k: ['lash','eyelash','lash extension','volume','classic lash','hybrid'],
+            a: "We do Lash Extensions! 👁 Custom sets tailored to your eye shape — from natural classic to dramatic volume.\n\nTo book or ask about pricing, call or text 📞 (815) 893-4112.",
+            c: ['How to Book','📞 Call or Text Us','Services & Pricing']
+        },
+        {
+            k: ['price','cost','how much','fee','charge','rate','pricing','cheap','expensive','$'],
+            a: "For our full, up-to-date pricing, the best way is to call or text Vy directly:\n\n📞 Call: (815) 893-4112\n💬 Text: (630) 400-3480\n\nShe'll give you all the details!",
+            c: ['How to Book','📞 Call or Text Us','Services & Pricing']
+        },
+        {
+            k: ['book','appointment','schedule','reserve','slot','available','availability','how to book'],
+            a: "Booking is simple! Just call or text Vy:\n\n📞 Call: (815) 893-4112\n💬 Text: (630) 400-3480\n\nShe'll get you set up with a date and time that works for you! 🗓",
+            c: ['📞 Call or Text Us','Hours & Schedule','Services & Pricing']
+        },
+        {
+            k: ['location','address','where','find','map','direction','carlemont','crystal lake','get there','navigate','unit'],
+            a: "You can find us at:\n\n📍 1520 Carlemont Dr, Unit J\n   Crystal Lake, IL 60014\n\n📞 (815) 893-4112\n\nOpen 7 days a week — we'd love to see you!",
+            c: ['🗺 Get Directions','How to Book','Hours & Schedule']
+        },
+        {
+            k: ['phone','call','number','contact','reach','talk','speak','text'],
+            a: "You can reach us two ways:\n\n📞 Call: (815) 893-4112\n💬 Text: (630) 400-3480\n\nWe're happy to answer any questions or get you booked!",
+            c: ['📞 Call or Text Us','How to Book','Hours & Schedule']
+        },
+        {
+            k: ['instagram','social','insta','ig','follow','social media','@'],
+            a: "Follow us on Instagram for nail & lash inspiration! 📸\n\n👉 @nailsandlash1520\n\nWe post our latest work there — you'll love it! 💜",
+            c: ['How to Book','Services & Pricing','Our Location']
+        },
+        {
+            k: ['vy','owner','who','about','story','technician','artist','meet','founder'],
+            a: "Vy is the heart of this studio 💜 With 10+ years of experience in nails and lashes, she treats every appointment as a personal, collaborative session. Her goal: leave you feeling like the most confident version of yourself.",
+            c: ['How to Book','Services & Pricing','Our Location']
+        },
+        {
+            k: ['cancel','reschedule','refund','policy','late','change','missed'],
+            a: "For cancellations or rescheduling, please call or text us at (815) 893-4112 at least 24 hours in advance. We really appreciate it! 🙏",
+            c: ['📞 Call or Text Us','How to Book']
+        },
+        {
+            k: ['walk','walk-in','without appointment','drop in','drop-in','just come'],
+            a: "We're primarily by appointment to give every client the full Vy experience! Give us a call or text at (815) 893-4112 — we may have a last-minute spot available. 📞",
+            c: ['How to Book','📞 Call or Text Us','Hours & Schedule']
+        },
+        {
+            k: ['park','parking','car'],
+            a: "There's parking available right at our location — 1520 Carlemont Dr, Unit J, Crystal Lake, IL. 🚗",
+            c: ['🗺 Get Directions','How to Book']
+        },
+        {
+            k: ['thank','thanks','thank you','thx','ty','great','awesome','perfect','nice','love it','wonderful'],
+            a: "You're so welcome! 💜 Is there anything else I can help with?",
+            c: ['Services & Pricing','How to Book','Hours & Schedule','Our Location']
+        },
+        {
+            k: ['bye','goodbye','see you','cya','ttyl','later'],
+            a: "Goodbye! We can't wait to see you at the studio soon. 💅✨",
+            c: ['How to Book']
+        }
+    ];
+
+    var DEFAULT_RESP = {
+        a: "I'm not 100% sure about that, but Vy would love to help!\n\n📞 Call: (815) 893-4112\n💬 Text: (630) 400-3480\n\nWe're happy to answer any questions!",
+        c: ['Hours & Schedule','Services & Pricing','How to Book','Our Location']
+    };
+
+    var WELCOME = {
+        a: "Hi! 👋 Welcome to Nails & Lashes. I'm here to help with anything — services, hours, pricing, or booking. What can I help you with today?",
+        c: ['Hours & Schedule','Services & Pricing','How to Book','Our Location']
+    };
+
+    var isOpen    = false;
+    var welcomed  = false;
+    var chatPane  = document.getElementById('chat-pane');
+    var toggle    = document.getElementById('chat-toggle');
+    var closeBtn  = document.getElementById('chat-close');
+    var msgBox    = document.getElementById('chat-messages');
+    var chips     = document.getElementById('quick-replies');
+    var input     = document.getElementById('chat-input');
+    var sendBtn   = document.getElementById('chat-send');
+    var icon      = document.getElementById('chat-icon');
+
+    // ── Render helpers ────────────────────────────────────────
+    function addMsg(text, isUser) {
+        var wrap   = document.createElement('div');
+        wrap.className = isUser ? 'flex justify-end' : 'flex justify-start';
+        var bubble = document.createElement('div');
+        bubble.style.cssText = isUser
+            ? 'background:#7B2D5E;color:#fff;border-radius:1rem 1rem 0.25rem 1rem;padding:10px 14px;font-size:0.875rem;max-width:82%;line-height:1.5'
+            : 'background:#fff;color:#1c1c1a;border-radius:1rem 1rem 1rem 0.25rem;padding:10px 14px;font-size:0.875rem;max-width:82%;line-height:1.5;box-shadow:0 1px 3px rgba(0,0,0,0.08)';
+        bubble.innerHTML = text.replace(/\n/g, '<br>');
+        wrap.appendChild(bubble);
+        msgBox.appendChild(wrap);
+        msgBox.scrollTop = msgBox.scrollHeight;
+    }
+
+    function showTyping() {
+        var wrap = document.createElement('div');
+        wrap.className = 'flex justify-start';
+        wrap.id = 'typing';
+        wrap.innerHTML = '<div style="background:#fff;border-radius:1rem 1rem 1rem 0.25rem;padding:12px 16px;box-shadow:0 1px 3px rgba(0,0,0,0.08);display:flex;gap:5px;align-items:center"><span class="typing-dot" style="width:8px;height:8px;background:#c4b0bc;border-radius:50%;animation:bounce 1s infinite;animation-delay:0ms;display:inline-block"></span><span class="typing-dot" style="width:8px;height:8px;background:#c4b0bc;border-radius:50%;animation:bounce 1s infinite;animation-delay:160ms;display:inline-block"></span><span class="typing-dot" style="width:8px;height:8px;background:#c4b0bc;border-radius:50%;animation:bounce 1s infinite;animation-delay:320ms;display:inline-block"></span></div>';
+        msgBox.appendChild(wrap);
+        msgBox.scrollTop = msgBox.scrollHeight;
+    }
+
+    function removeTyping() {
+        var t = document.getElementById('typing');
+        if (t) t.remove();
+    }
+
+    function setChips(list) {
+        chips.innerHTML = '';
+        list.forEach(function (label) {
+            var btn = document.createElement('button');
+            btn.textContent = label;
+            btn.style.cssText = 'font-size:0.7rem;border:1px solid #7B2D5E;color:#7B2D5E;border-radius:9999px;padding:4px 12px;background:transparent;cursor:pointer;transition:all 0.15s;white-space:nowrap';
+            btn.onmouseover = function () { btn.style.background = '#7B2D5E'; btn.style.color = '#fff'; };
+            btn.onmouseout  = function () { btn.style.background = 'transparent'; btn.style.color = '#7B2D5E'; };
+            btn.addEventListener('click', function () { handle(label); });
+            chips.appendChild(btn);
+        });
+    }
+
+    // ── Response logic ────────────────────────────────────────
+    function getResponse(text) {
+        var lower = text.toLowerCase();
+        for (var i = 0; i < KB.length; i++) {
+            for (var j = 0; j < KB[i].k.length; j++) {
+                if (lower.indexOf(KB[i].k[j]) !== -1) return KB[i];
+            }
+        }
+        return DEFAULT_RESP;
+    }
+
+    function handle(text) {
+        if (!text.trim()) return;
+        addMsg(text, true);
+        input.value = '';
+        chips.innerHTML = '';
+
+        // Special chip actions
+        if (text === '📅 Book Now' || text === 'Book Appointment' || text === 'Book with Vy') {
+            showTyping();
+            setTimeout(function () {
+                removeTyping();
+                addMsg("Opening the booking form for you now! 🗓", false);
+                setChips(['How to Book','Services & Pricing']);
+                var ob = document.querySelector('.open-booking');
+                if (ob) ob.click();
+            }, 600);
+            return;
+        }
+        if (text === 'How to Book') {
+            handle('how to book');
+            return;
+        }
+        if (text === '📞 Call or Text Us' || text === '📞 Call Now') {
+            showTyping();
+            setTimeout(function () {
+                removeTyping();
+                addMsg("Ready to connect? 📞\n\nCall: (815) 893-4112\n💬 Text: (630) 400-3480\n\nTap a button below to reach us!", false);
+                setChips(['📞 Call (815) 893-4112','💬 Text (630) 400-3480']);
+            }, 500);
+            return;
+        }
+        if (text === '📞 Call (815) 893-4112') {
+            window.location.href = 'tel:+18158934112';
+            return;
+        }
+        if (text === '💬 Text (630) 400-3480') {
+            window.location.href = 'sms:+16304003480';
+            return;
+        }
+        if (text === '🗺 Get Directions') {
+            window.open('https://www.google.com/maps/search/?api=1&query=1520+Carlemont+Dr+Unit+J+Crystal+Lake+IL+60014', '_blank');
+            return;
+        }
+
+        showTyping();
+        var delay = 600 + Math.random() * 400;
+        setTimeout(function () {
+            removeTyping();
+            var resp = getResponse(text);
+            addMsg(resp.a, false);
+            if (resp.c) setChips(resp.c);
+        }, delay);
+    }
+
+    // ── Open / Close ──────────────────────────────────────────
+    function openChat() {
+        isOpen = true;
+        chatPane.style.display = 'flex';
+        icon.textContent = 'close';
+        if (!welcomed) {
+            welcomed = true;
+            setTimeout(function () {
+                addMsg(WELCOME.a, false);
+                setChips(WELCOME.c);
+            }, 300);
+        }
+        setTimeout(function () { input.focus(); }, 350);
+    }
+
+    function closeChat() {
+        isOpen = false;
+        chatPane.style.display = 'none';
+        icon.textContent = 'chat';
+    }
+
+    toggle.addEventListener('click', function () { isOpen ? closeChat() : openChat(); });
+    closeBtn.addEventListener('click', closeChat);
+    sendBtn.addEventListener('click', function () { handle(input.value.trim()); });
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') handle(input.value.trim()); });
+
+    // Bounce animation for typing dots
+    var style = document.createElement('style');
+    style.textContent = '@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}';
+    document.head.appendChild(style);
+})();
+</script>
 <!-- Scripts -->
 <script>
     // Mobile Menu Toggle logic
@@ -490,5 +913,244 @@
             });
         });
     });
+</script>
+
+<!-- Booking Modal Script -->
+<script>
+(function () {
+    const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const DAY_NAMES   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+    let calYear, calMonth;
+    let selectedDate = null;
+
+    const modal       = document.getElementById('booking-modal');
+    const step1       = document.getElementById('step-1');
+    const step2       = document.getElementById('step-2');
+    const step3       = document.getElementById('step-3');
+    const calGrid     = document.getElementById('calendar-grid');
+    const timeGrid    = document.getElementById('time-grid');
+    const sumService  = document.getElementById('summary-service');
+    const sumDate     = document.getElementById('summary-date');
+    const sumTime     = document.getElementById('summary-time');
+    const sumPrice    = document.getElementById('summary-price');
+
+    // ── Calendar ──────────────────────────────────────────────
+    function renderCalendar(year, month) {
+        calYear  = year;
+        calMonth = month;
+        document.getElementById('current-month').textContent = MONTH_NAMES[month] + ' ' + year;
+        calGrid.innerHTML = '';
+
+        // Day-of-week headers
+        ['S','M','T','W','T','F','S'].forEach(function(d) {
+            var h = document.createElement('div');
+            h.className = 'text-gray-400 py-2 font-medium';
+            h.textContent = d;
+            calGrid.appendChild(h);
+        });
+
+        var today    = new Date(); today.setHours(0,0,0,0);
+        var firstDay = new Date(year, month, 1).getDay();
+        var prevDays = new Date(year, month, 0).getDate();
+        var daysInM  = new Date(year, month + 1, 0).getDate();
+
+        // Leading grey cells (prev month)
+        for (var i = firstDay - 1; i >= 0; i--) {
+            var g = document.createElement('div');
+            g.className = 'py-3 text-gray-300 text-center';
+            g.textContent = prevDays - i;
+            calGrid.appendChild(g);
+        }
+
+        // Current month days
+        for (var d = 1; d <= daysInM; d++) {
+            var date      = new Date(year, month, d);
+            var isPast    = date < today;
+            var isToday   = date.getTime() === today.getTime();
+            var isSel     = selectedDate && date.getTime() === selectedDate.getTime();
+
+            if (isPast) {
+                var g2 = document.createElement('div');
+                g2.className = 'py-3 text-gray-300 text-center';
+                g2.textContent = d;
+                calGrid.appendChild(g2);
+            } else {
+                (function(day, dt) {
+                    var btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.textContent = day;
+                    if (isSel) {
+                        btn.className = 'py-3 bg-[#7B2D5E] text-white rounded-lg font-bold w-full';
+                    } else if (isToday) {
+                        btn.className = 'py-3 ring-2 ring-[#7B2D5E] text-[#7B2D5E] rounded-lg font-bold hover:bg-[#7B2D5E]/10 w-full transition-colors';
+                    } else {
+                        btn.className = 'py-3 hover:bg-[#7B2D5E]/10 rounded-lg transition-colors w-full';
+                    }
+                    btn.addEventListener('click', function() { selectDate(dt, day); });
+                    calGrid.appendChild(btn);
+                })(d, date);
+            }
+        }
+
+        // Trailing grey cells
+        var total     = firstDay + daysInM;
+        var remaining = (7 - (total % 7)) % 7;
+        for (var j = 1; j <= remaining; j++) {
+            var g3 = document.createElement('div');
+            g3.className = 'py-3 text-gray-300 text-center';
+            g3.textContent = j;
+            calGrid.appendChild(g3);
+        }
+    }
+
+    function selectDate(date, day) {
+        selectedDate = date;
+        sumDate.textContent = DAY_NAMES[date.getDay()] + ', ' + MONTH_NAMES[calMonth] + ' ' + day;
+        renderCalendar(calYear, calMonth);   // re-render to show highlight
+        renderTimes(date.getDay());
+    }
+
+    // ── Time slots ────────────────────────────────────────────
+    function renderTimes(dayOfWeek) {
+        timeGrid.innerHTML = '';
+        sumTime.textContent = 'Not selected';
+
+        if (dayOfWeek === null || dayOfWeek === undefined) {
+            var msg = document.createElement('p');
+            msg.className = 'col-span-3 text-xs text-gray-400 italic text-center py-2';
+            msg.textContent = 'Select a date above to see available times';
+            timeGrid.appendChild(msg);
+            return;
+        }
+
+        // Sun closes 4PM, Sat closes 6PM, Mon–Fri closes 7PM
+        var timesBySunday = ['10:00 AM','11:30 AM','01:00 PM','02:30 PM'];
+        var timesBySat    = ['10:00 AM','11:30 AM','01:00 PM','02:30 PM','04:00 PM'];
+        var timesWeekday  = ['10:00 AM','11:30 AM','01:00 PM','02:30 PM','04:00 PM','05:30 PM'];
+        var times = dayOfWeek === 0 ? timesBySunday : dayOfWeek === 6 ? timesBySat : timesWeekday;
+
+        times.forEach(function(t) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.textContent = t;
+            btn.className = 'time-btn border rounded-lg py-2 text-sm hover:border-[#7B2D5E] hover:text-[#7B2D5E] transition-colors';
+            btn.addEventListener('click', function() {
+                timeGrid.querySelectorAll('.time-btn').forEach(function(b) {
+                    b.className = 'time-btn border rounded-lg py-2 text-sm hover:border-[#7B2D5E] hover:text-[#7B2D5E] transition-colors';
+                });
+                btn.className = 'time-btn border-2 border-[#7B2D5E] bg-[#7B2D5E]/5 rounded-lg py-2 text-sm text-[#7B2D5E] font-bold';
+                sumTime.textContent = t;
+                setTimeout(function() {
+                    step2.classList.add('hidden');
+                    step3.classList.remove('hidden');
+                }, 200);
+            });
+            timeGrid.appendChild(btn);
+        });
+    }
+
+    // ── Open / Close ──────────────────────────────────────────
+    function openModal() {
+        var now = new Date();
+        selectedDate = null;
+        sumService.textContent  = 'Not selected';
+        sumDate.textContent     = 'Not selected';
+        sumTime.textContent     = 'Not selected';
+        sumPrice.textContent    = '$0';
+        document.getElementById('booking-name').value  = '';
+        document.getElementById('booking-email').value = '';
+        document.getElementById('booking-phone').value = '';
+        document.querySelectorAll('.service-btn').forEach(function(b) {
+            b.classList.remove('border-[#7B2D5E]', 'bg-[#7B2D5E]/5');
+        });
+        step1.classList.remove('hidden');
+        step2.classList.add('hidden');
+        step3.classList.add('hidden');
+        renderCalendar(now.getFullYear(), now.getMonth());
+        renderTimes(null);
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    // ── Event listeners ───────────────────────────────────────
+    document.querySelectorAll('.open-booking').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal();
+        });
+    });
+
+    document.getElementById('close-booking').addEventListener('click', closeModal);
+
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+    });
+
+    document.getElementById('prev-month').addEventListener('click', function() {
+        var m = calMonth - 1, y = calYear;
+        if (m < 0) { m = 11; y--; }
+        var now = new Date();
+        if (y < now.getFullYear() || (y === now.getFullYear() && m < now.getMonth())) return;
+        selectedDate = null;
+        renderCalendar(y, m);
+        renderTimes(null);
+    });
+
+    document.getElementById('next-month').addEventListener('click', function() {
+        var m = calMonth + 1, y = calYear;
+        if (m > 11) { m = 0; y++; }
+        selectedDate = null;
+        renderCalendar(y, m);
+        renderTimes(null);
+    });
+
+    // Step 1 → Step 2
+    document.querySelectorAll('.service-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.service-btn').forEach(function(b) {
+                b.classList.remove('border-[#7B2D5E]', 'bg-[#7B2D5E]/5');
+            });
+            btn.classList.add('border-[#7B2D5E]', 'bg-[#7B2D5E]/5');
+            sumService.textContent = btn.getAttribute('data-service');
+            sumPrice.textContent   = btn.getAttribute('data-price');
+            step1.classList.add('hidden');
+            step2.classList.remove('hidden');
+        });
+    });
+
+    document.getElementById('back-to-step-1').addEventListener('click', function() {
+        step2.classList.add('hidden');
+        step1.classList.remove('hidden');
+    });
+
+    document.getElementById('back-to-step-2').addEventListener('click', function() {
+        step3.classList.add('hidden');
+        step2.classList.remove('hidden');
+    });
+
+    // Confirm
+    document.getElementById('confirm-booking').addEventListener('click', function() {
+        var name  = document.getElementById('booking-name').value.trim();
+        var email = document.getElementById('booking-email').value.trim();
+        var phone = document.getElementById('booking-phone').value.trim();
+        if (!name || !email || !phone) {
+            alert('Please fill in all fields before confirming.');
+            return;
+        }
+        alert('Booking request sent! Vy will contact you shortly to confirm your appointment.');
+        closeModal();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+    });
+})();
 </script>
 </body></html>
